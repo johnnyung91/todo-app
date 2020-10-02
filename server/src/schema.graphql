@@ -3,8 +3,18 @@ type Query {
   getStudents: [Student!]!
 }
 
+type Mutation {
+  addStudent(
+    firstName: String!
+    lastName: String!
+    gradeLevel: String!
+    email: String!
+    phoneNumber: String!
+  ): Student!
+}
+
 type Student {
-  id: Int!
+  id: ID!
   firstName: String!
   lastName: String!
   gradeLevel: String!
