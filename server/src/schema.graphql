@@ -1,3 +1,13 @@
 type Query {
   test: String!
+  getStudents: [Student!]!
+}
+
+type Student {
+  id: Int!
+  firstName: String!
+  lastName: String!
+  gradeLevel: String!
+  email: String!
+  phoneNumber: String!
 }
