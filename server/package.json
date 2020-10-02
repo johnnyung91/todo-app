@@ -1,0 +1,28 @@
+{
+  "name": "report-card-app",
+  "version": "1.0.0",
+  "description": "A basic application using React and a GraphQL server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/johnny_novvum/report-card-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/johnny_novvum/report-card-app/issues"
+  },
+  "homepage": "https://gitlab.com/johnny_novvum/report-card-app#readme",
+  "dependencies": {
+    "@prisma/client": "^2.8.0",
+    "graphql-yoga": "^1.18.3"
+  },
+  "devDependencies": {
+    "@prisma/cli": "^2.8.0"
+  }
+}
