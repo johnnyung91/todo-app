@@ -1,23 +1,27 @@
 type Query {
   test: String!
-  getStudents: [Student!]!
+  getUsers: [Users!]!
+  getTodos: [Todos!]!
+  getCompleted(completed: Boolean!): [Todos!]!
 }
 
 type Mutation {
-  addStudent(
-    firstName: String!
-    lastName: String!
-    gradeLevel: String!
-    email: String!
-    phoneNumber: String!
-  ): Student!
+  addUser(name: String!): Users!
+  addTodo(text: String!, completed: Boolean!): Todos!
+  updateTodo(id: ID!, text: String, completed: Boolean, assignedId: Int): Todos
+  completeTodo(id: ID!, completed: Boolean!): Todos
+  assignTodo(id: Int!, assignedId: Int!): Todos
+  deleteTodo(id: ID!): Todos
 }
 
-type Student {
+type Users {
   id: ID!
-  firstName: String!
-  lastName: String!
-  gradeLevel: String!
-  email: String!
-  phoneNumber: String!
+  name: String!
+  todos: [Todos]
+}
+
+type Todos {
+  id: ID!
+  text: String!
+  completed: Boolean!
 }
