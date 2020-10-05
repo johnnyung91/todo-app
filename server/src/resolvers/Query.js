@@ -2,11 +2,11 @@ function test(parent, args, context, info) {
   return "Hello World"
 }
 
-function getStudents(parent, args, context, info) {
-  return context.prisma.student.findMany()
+function getUsers(parent, args, context, info) {
+  return context.prisma.users.findMany()
 }
 
 module.exports = {
   test,
-  getStudents
+  getUsers
 }

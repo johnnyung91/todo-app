@@ -1,19 +1,15 @@
-function addStudent(parent, args, context, info) {
-  const {firstName, lastName, gradeLevel, email, phoneNumber} = args
+function addUser(parent, args, context, info) {
+  const { name } = args;
 
-  const newStudent = context.prisma.student.create({
+  const newUser = context.prisma.users.create({
     data: {
-      firstName,
-      lastName,
-      gradeLevel,
-      email,
-      phoneNumber
-    }
-  })
+      name,
+    },
+  });
 
-  return newStudent
+  return newUser;
 }
 
 module.exports = {
-  addStudent
-}
+  addUser,
+};
