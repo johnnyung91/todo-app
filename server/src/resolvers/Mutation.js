@@ -1,17 +1,17 @@
-const listOfStudents = require("../index")
-
 function addStudent(parent, args, context, info) {
   const {firstName, lastName, gradeLevel, email, phoneNumber} = args
-  const student = {
-    id: listOfStudents.students.length + 1,
-    firstName,
-    lastName,
-    gradeLevel,
-    email,
-    phoneNumber,
-  }
-  listOfStudents.students.push(student)
-  return student
+
+  const newStudent = context.prisma.student.create({
+    data: {
+      firstName,
+      lastName,
+      gradeLevel,
+      email,
+      phoneNumber
+    }
+  })
+
+  return newStudent
 }
 
 module.exports = {

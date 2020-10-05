@@ -5,11 +5,11 @@ const prisma = new PrismaClient();
 async function addStudent() {
   const newStudent = await prisma.student.create({
     data: {
-      firstName: "Michael",
-      lastName: "Zhu",
+      firstName: "Sarah",
+      lastName: "Choung",
       gradeLevel: "freshman",
-      email: "mzhu23@gmail.com",
-      phoneNumber: "626-123-4567",
+      email: "sarahchoung@gmail.com",
+      phoneNumber: "714-987-6543",
     },
   })
 
