@@ -7,14 +7,15 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Users {
+model User {
   id    Int @default(autoincrement()) @id
   name  String
-  todos Todos[]
+  todos Todo[]
 }
 
-model Todos {
+model Todo {
   id        Int  @default(autoincrement()) @id
   text      String
   completed Boolean @default(false)
+  assigned  User?
 }

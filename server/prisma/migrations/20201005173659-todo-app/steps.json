@@ -25,11 +25,11 @@
     },
     {
       "tag": "CreateModel",
-      "model": "Users"
+      "model": "User"
     },
     {
       "tag": "CreateField",
-      "model": "Users",
+      "model": "User",
       "field": "id",
       "type": "Int",
       "arity": "Required"
@@ -39,7 +39,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "Users",
+          "model": "User",
           "field": "id"
         },
         "directive": "default"
@@ -51,7 +51,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "Users",
+          "model": "User",
           "field": "id"
         },
         "directive": "default"
@@ -64,7 +64,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "Users",
+          "model": "User",
           "field": "id"
         },
         "directive": "id"
@@ -72,25 +72,25 @@
     },
     {
       "tag": "CreateField",
-      "model": "Users",
+      "model": "User",
       "field": "name",
       "type": "String",
       "arity": "Required"
     },
     {
       "tag": "CreateField",
-      "model": "Users",
+      "model": "User",
       "field": "todos",
-      "type": "Todos",
+      "type": "Todo",
       "arity": "List"
     },
     {
       "tag": "CreateModel",
-      "model": "Todos"
+      "model": "Todo"
     },
     {
       "tag": "CreateField",
-      "model": "Todos",
+      "model": "Todo",
       "field": "id",
       "type": "Int",
       "arity": "Required"
@@ -100,7 +100,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "Todos",
+          "model": "Todo",
           "field": "id"
         },
         "directive": "default"
@@ -112,7 +112,7 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "Todos",
+          "model": "Todo",
           "field": "id"
         },
         "directive": "default"
@@ -125,7 +125,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "Todos",
+          "model": "Todo",
           "field": "id"
         },
         "directive": "id"
@@ -133,14 +133,14 @@
     },
     {
       "tag": "CreateField",
-      "model": "Todos",
+      "model": "Todo",
       "field": "text",
       "type": "String",
       "arity": "Required"
     },
     {
       "tag": "CreateField",
-      "model": "Todos",
+      "model": "Todo",
       "field": "completed",
       "type": "Boolean",
       "arity": "Required"
@@ -150,7 +150,7 @@
       "location": {
         "path": {
           "tag": "Field",
-          "model": "Todos",
+          "model": "Todo",
           "field": "completed"
         },
         "directive": "default"
@@ -162,13 +162,20 @@
         "tag": "Directive",
         "path": {
           "tag": "Field",
-          "model": "Todos",
+          "model": "Todo",
           "field": "completed"
         },
         "directive": "default"
       },
       "argument": "",
       "value": "false"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Todo",
+      "field": "assigned",
+      "type": "User",
+      "arity": "Required"
     }
   ]
 }
