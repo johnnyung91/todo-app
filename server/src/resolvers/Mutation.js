@@ -20,9 +20,9 @@ function addTodo(parent, args, context, info) {
 }
 
 function updateTodo(parent, args, context, info) {
-  const { id, text, completed } = args;
+  const { todoId, text, completed } = args;
   return context.prisma.todo.update({
-    where: { id: parseInt(id) },
+    where: { todoId: parseInt(todoId) },
     data: {
       text,
       completed,
@@ -31,19 +31,17 @@ function updateTodo(parent, args, context, info) {
 }
 
 function deleteTodo(parent, args, context, info) {
-  const { id } = args;
+  const { todoId } = args;
   return context.prisma.todo.delete({
-    where: {
-      id: parseInt(id),
-    },
+    where: {todoId: parseInt(todoId)},
   });
 }
 
 function completeTodo(parent, args, context, info) {
-  const { id, completed } = args;
+  const { todoId, completed } = args;
 
   const todo = context.prisma.todo.findOne({
-    where: { id: parseInt(id) },
+    where: { todoId: parseInt(todoId) },
   });
 
   if (!todo) throw new Error("Todo not found!");
@@ -52,33 +50,33 @@ function completeTodo(parent, args, context, info) {
     data: {
       completed,
     },
-    where: { id: parseInt(id) },
+    where: { todoId: parseInt(todoId) },
   });
 }
 
 function assignTodo(parent, args, context, info) {
-  const { id, assignedId } = args;
+  const { todoId, assignedId } = args;
 
   const todo = context.prisma.todo.findOne({
-    where: { id: parseInt(id) },
+    where: { todoId: parseInt(todoId) },
   });
   if (!todo) throw new Error("Todo not found!");
 
   const user = context.prisma.user.findOne({
-    where: {id: parseInt(assignedId)}
-  })
-  if (!user) throw new Error("User not found!")
+    where: { userId: assignedId },
+  });
+  if (!user) throw new Error("User not found!");
 
   return context.prisma.todo.update({
-    where: {id: id},
+    where: { todoId: parseInt(todoId) },
     data: {
       assigned: {
         connect: {
-          id: assignedId
-        }
-      }
-    }
-  })
+          userId: assignedId,
+        },
+      },
+    },
+  });
 }
 
 module.exports = {

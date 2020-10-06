@@ -8,20 +8,20 @@ type Query {
 type Mutation {
   addUser(name: String!): Users!
   addTodo(text: String!, completed: Boolean!): Todos!
-  updateTodo(id: ID!, text: String, completed: Boolean, assignedId: Int): Todos
-  completeTodo(id: ID!, completed: Boolean!): Todos
-  assignTodo(id: Int!, assignedId: Int!): Todos
-  deleteTodo(id: ID!): Todos
+  updateTodo(todoId: ID!, text: String, completed: Boolean, assignedId: Int): Todos
+  completeTodo(todoId: ID!, completed: Boolean!): Todos
+  assignTodo(todoId: Int!, assignedId: Int!): Todos
+  deleteTodo(todoId: ID!): Todos
 }
 
 type Users {
-  id: ID!
+  userId: ID!
   name: String!
   todos: [Todos]
 }
 
 type Todos {
-  id: ID!
+  todoId: ID!
   text: String!
   completed: Boolean!
 }
