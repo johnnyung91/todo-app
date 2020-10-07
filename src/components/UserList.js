@@ -1,20 +1,8 @@
 import React from "react";
-import { gql, useQuery } from "@apollo/client";
-import User from './User'
+import { useQuery } from "@apollo/client";
+import User from "./User";
+import { USERS_QUERY } from "../query";
 
-const USERS_QUERY = gql`
-  {
-    getUsers {
-      userId
-      name
-      todos {
-        todoId
-        text
-        completed
-      }
-    }
-  }
-`;
 
 export default function UserList() {
   const { loading, error, data } = useQuery(USERS_QUERY);
@@ -24,13 +12,16 @@ export default function UserList() {
     return <div>Error</div>;
   }
   const { getUsers: users } = data;
-  console.log(users)
 
   return (
-    <div className="container">
-      <div className="row py-5">
-        {users.map(user =>  <User key={user.userId} user={user}/>)}
+    <>
+      <div className="container">
+        <div className="row py-5">
+          {users.map((user) => (
+            <User key={user.userId} user={user} />
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

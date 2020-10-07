@@ -14,17 +14,9 @@ function getTodos(parent, args, context, info) {
   return context.prisma.todo.findMany();
 }
 
-function getCompleted(parent, args, context, info) {
-  const { completed } = args;
-
-  return context.prisma.todo.findMany({
-    where: { completed },
-  });
-}
 
 module.exports = {
   test,
   getUsers,
   getTodos,
-  getCompleted,
 };

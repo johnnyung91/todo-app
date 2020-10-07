@@ -22,18 +22,20 @@ async function main() {
   // })
   // console.log(JSON.stringify(usersWithTodos, null, 2))
 
-  // return await prisma.todo.update({
-  //   where: {id: 3},
-  //   data: {
-  //     assigned: {
-  //       connect: {
-  //         id: 1
-  //       }
-  //     }
+  return await prisma.todo.update({
+    where: {id: 3},
+    data: {
+      text: "Do laundry",
+      completed: true
+    }
+  })
+  // const allTodos = await prisma.todo.findMany();
+  // console.log(allTodos);
+  // return await prisma.user.delete({
+  //   where: {
+  //     userId: parseInt(17)
   //   }
   // })
-  const allTodos = await prisma.todo.findMany();
-  console.log(allTodos);
 }
 
 // Call main()
