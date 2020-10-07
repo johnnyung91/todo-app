@@ -2,12 +2,11 @@ type Query {
   test: String!
   getUsers: [Users!]!
   getTodos: [Todos!]!
-  getCompleted(completed: Boolean!): [Todos!]!
 }
 
 type Mutation {
   addUser(name: String!): Users!
-  addTodo(text: String!, completed: Boolean!): Todos!
+  addTodo(text: String!, completed: Boolean!, assignedId: Int!): Todos!
   updateTodo(id: ID!, text: String, completed: Boolean, assignedId: Int): Todos
   completeTodo(id: ID!, completed: Boolean!): Todos
   assignTodo(id: Int!, assignedId: Int!): Todos
@@ -15,7 +14,7 @@ type Mutation {
 }
 
 type Users {
-  id: ID!
+  userId: ID!
   name: String!
   todos: [Todos]
 }

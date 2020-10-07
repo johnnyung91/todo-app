@@ -1,6 +1,8 @@
-function addUser(parent, args, context, info) {
+async function addUser(parent, args, context, info) {
   const { name } = args;
-  const newUser = context.prisma.user.create({
+  if (!name) throw new Error("Name must be provided")
+
+  const newUser = await context.prisma.user.create({
     data: {
       name,
     },
@@ -8,77 +10,61 @@ function addUser(parent, args, context, info) {
   return newUser;
 }
 
-function addTodo(parent, args, context, info) {
-  const { text, completed } = args;
-  const newTodo = context.prisma.todo.create({
+async function addTodo(parent, args, context, info) {
+  const { text, completed, assignedId } = args;
+  const newTodo = await context.prisma.todo.create({
     data: {
       text,
       completed,
+      // Assigning todo using connect
+      assigned: {
+        connect: {
+          userId: assignedId
+        }
+      }
     },
   });
   return newTodo;
 }
 
-function updateTodo(parent, args, context, info) {
-  const { id, text, completed } = args;
-  return context.prisma.todo.update({
+async function updateTodo(parent, args, context, info) {
+  const { id, text, completed, assignedId } = args;
+  return await context.prisma.todo.update({
     where: { id: parseInt(id) },
     data: {
       text,
       completed,
+      assigned: {
+        connect: {
+          userId: assignedId
+        }
+      }
     },
   });
 }
 
-function deleteTodo(parent, args, context, info) {
+async function deleteTodo(parent, args, context, info) {
   const { id } = args;
-  return context.prisma.todo.delete({
-    where: {
-      id: parseInt(id),
-    },
+  return await context.prisma.todo.delete({
+    where: {id: parseInt(id)},
   });
 }
 
-function completeTodo(parent, args, context, info) {
+async function completeTodo(parent, args, context, info) {
   const { id, completed } = args;
 
-  const todo = context.prisma.todo.findOne({
+  const todo = await context.prisma.todo.findOne({
     where: { id: parseInt(id) },
   });
 
   if (!todo) throw new Error("Todo not found!");
 
-  return context.prisma.todo.update({
+  return await context.prisma.todo.update({
     data: {
       completed,
     },
     where: { id: parseInt(id) },
   });
-}
-
-function assignTodo(parent, args, context, info) {
-  const { id, assignedId } = args;
-
-  const todo = context.prisma.todo.findOne({
-    where: { id: parseInt(id) },
-  });
-  if (!todo) throw new Error("Todo not found!");
-
-  const user = context.prisma.user.findOne({
-    where: {id: parseInt(assignedId)}
-  })
-  if (!user) throw new Error("User not found!")
-
-  return context.prisma.todo.update({
-    where: {id: id},
-    data: {
-      assigned: {
-        connect: {
-          id: assignedId
-        }
-      }
-    }
-  })
 }
 
 module.exports = {
@@ -87,5 +73,4 @@ module.exports = {
   updateTodo,
   deleteTodo,
   completeTodo,
-  assignTodo,
 };
